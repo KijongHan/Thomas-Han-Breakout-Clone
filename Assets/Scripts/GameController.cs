@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class GameStartEventArgs : EventArgs { }
 
+public class GameInitializeEventArgs : EventArgs { }
+
 public class GameController : MonoBehaviour
 {
+    public static event EventHandler<GameInitializeEventArgs> OnGameInitialize;
     public static event EventHandler<GameStartEventArgs> OnGameStart;
 
     public BoundaryController[] BoundariesPrefab;
@@ -37,6 +40,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InitializeGame();
         StartGame();
     }
 
@@ -48,17 +52,17 @@ public class GameController : MonoBehaviour
 
     private void InitializeGame()
     {
-
-    }
-
-    private void StartGame()
-    {
         foreach (var boundary in BoundariesPrefab)
         {
             var boundaryInstance = Instantiate(boundary);
             boundaryInstance.ZPosition = ZPosition;
         }
         var playerInstance = Instantiate(PlayerPrefab, new Vector3(PlayerSpawnPosition.x, PlayerSpawnPosition.y, ZPosition), Quaternion.identity);
+        OnGameInitialize?.Invoke(this, new GameInitializeEventArgs());
+    }
+
+    private void StartGame()
+    {
         OnGameStart?.Invoke(this, new GameStartEventArgs());
     }
 }

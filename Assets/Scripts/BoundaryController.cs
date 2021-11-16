@@ -26,15 +26,15 @@ public class BoundaryController : MonoBehaviour
     void OnEnable()
     {
         OnDisable();
-        GameController.OnGameStart += HandleOnGameStart;
+        GameController.OnGameInitialize += HandleOnGameInitialize;
     }
 
     void OnDisable()
     {
-        GameController.OnGameStart -= HandleOnGameStart;
+        GameController.OnGameInitialize -= HandleOnGameInitialize;
     }
 
-    private void HandleOnGameStart(object sender, GameStartEventArgs e)
+    private void HandleOnGameInitialize(object sender, GameInitializeEventArgs e)
     {
         InitializeBoundary();
     }

@@ -11,16 +11,26 @@ public class PlayerController : MonoBehaviour
     {
         OnDisable();
         BoundaryDeathController.OnDeath += HandleOnDeath;
-        GameController.OnGameStart += HandleOnGameStart;
+        GameController.OnGameInitialize += HandleOnGameInitialize;
     }
 
     void OnDisable()
     {
         BoundaryDeathController.OnDeath -= HandleOnDeath;
-        GameController.OnGameStart -= HandleOnGameStart;
+        GameController.OnGameInitialize -= HandleOnGameInitialize;
     }
 
-    private void HandleOnGameStart(object sender, GameStartEventArgs e)
+    private void HandleOnGameInitialize(object sender, GameInitializeEventArgs e)
+    {
+        InitializeBall();
+    }
+
+    private void HandleOnDeath(object sender, BoundaryDeathEventArgs e)
+    {
+        InitializeBall();
+    }
+
+    private void InitializeBall()
     {
         var ballInstance = Instantiate(BallPrefab);
         ballInstance.Player = this;
@@ -31,11 +41,6 @@ public class PlayerController : MonoBehaviour
             z = transform.position.z
         };
         ballInstance.FollowPlayerOffset = ballInstance.transform.position - transform.position;
-    }
-
-    private void HandleOnDeath(object sender, BoundaryDeathEventArgs e)
-    {
-
     }
 
     // Start is called before the first frame update
