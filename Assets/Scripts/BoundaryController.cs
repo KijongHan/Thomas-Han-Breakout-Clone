@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,9 +18,26 @@ public class BoundaryController : MonoBehaviour
     public Vector3 FaceDirection;
     public float Thickness = 1F;
     public float Depth = 4F;
-    public float ZPosition = 0F;
+    
+    public float ZPosition { get; set; }
 
     private BoxCollider boxCollider;
+
+    void OnEnable()
+    {
+        OnDisable();
+        GameController.OnGameStart += HandleOnGameStart;
+    }
+
+    void OnDisable()
+    {
+        GameController.OnGameStart -= HandleOnGameStart;
+    }
+
+    private void HandleOnGameStart(object sender, GameStartEventArgs e)
+    {
+        InitializeBoundary();
+    }
 
     void Awake()
     {
@@ -28,6 +46,17 @@ public class BoundaryController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    private void InitializeBoundary()
     {
         var cameraOrigin = Camera.main.ScreenToWorldPoint(new Vector2(0, 0));
         var cameraScreenCenterX = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0));
@@ -39,7 +68,7 @@ public class BoundaryController : MonoBehaviour
         };
 
         boxCollider.size = new Vector3
-        { 
+        {
             x = Depth,
             y = BoundaryScale.x * screenSize.x * 2 + BoundaryScale.y * screenSize.y * 2,
             z = Thickness
@@ -51,13 +80,7 @@ public class BoundaryController : MonoBehaviour
             y = cameraPosition.y + (screenSize.y * PositionScale.y),
             z = ZPosition
         };
-        transform.LookAt(transform.parent.position, Vector3.up);
+        transform.LookAt(new Vector3(0F, 0F, ZPosition), Vector3.up);
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, 90, transform.rotation.eulerAngles.z);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
