@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallMovementController : MonoBehaviour
+public class BallController : MonoBehaviour
 {
     public float BounceVelocity = 2F;
 
@@ -12,6 +13,22 @@ public class BallMovementController : MonoBehaviour
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
+    }
+
+    void OnEnable()
+    {
+        OnDisable();
+        BoundaryDeathController.OnDeath += HandleOnDeath;
+    }
+
+    void OnDisable()
+    {
+        BoundaryDeathController.OnDeath -= HandleOnDeath;
+    }
+
+    private void HandleOnDeath(object sender, BoundaryDeathEventArgs e)
+    {
+        throw new NotImplementedException();
     }
 
     // Start is called before the first frame update
@@ -24,12 +41,6 @@ public class BallMovementController : MonoBehaviour
     void Update()
     {
         
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("TRIGGER ENTER");
-        rigidbody.velocity *= -1;
     }
 
     void OnCollisionEnter(Collision collision)

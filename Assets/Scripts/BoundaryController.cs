@@ -10,11 +10,13 @@ public enum Direction
     Right
 }
 
-public class BoundsController : MonoBehaviour
+public class BoundaryController : MonoBehaviour
 {
+    public Vector2 BoundaryScale;
     public Vector3 PositionScale;
     public Vector3 FaceDirection;
     public float Thickness = 1F;
+    public float Depth = 4F;
     public float ZPosition = 0F;
 
     private BoxCollider boxCollider;
@@ -36,7 +38,12 @@ public class BoundsController : MonoBehaviour
             y = Vector2.Distance(cameraOrigin, cameraScreenCenterY) * 0.5F
         };
 
-        boxCollider.size = new Vector3(Thickness, screenSize.x * 2, Thickness);
+        boxCollider.size = new Vector3
+        { 
+            x = Depth,
+            y = BoundaryScale.x * screenSize.x * 2 + BoundaryScale.y * screenSize.y * 2,
+            z = Thickness
+        };
         var cameraPosition = Camera.main.transform.position;
         transform.position = new Vector3
         {
