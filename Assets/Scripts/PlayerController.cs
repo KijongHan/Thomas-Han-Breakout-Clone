@@ -3,8 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class PlayerScoreUpdated : EventArgs
+{
+    public int ScoreFrom { get; set; }
+    public int ScoreTo { get; set; }
+}
+
 public class PlayerController : MonoBehaviour
 {
+    public static event EventHandler<PlayerScoreUpdated> OnPlayerScoreUpdated;
+
     public BallController BallPrefab;
 
     public int CurrentScore { get; private set; }
@@ -28,7 +36,9 @@ public class PlayerController : MonoBehaviour
     {
         if (e.Ball.Player == this)
         {
+            var prevScore = CurrentScore;
             CurrentScore += e.Brick.ScorePerDestroyedBrick;
+            OnPlayerScoreUpdated?.Invoke(this, new PlayerScoreUpdated { ScoreFrom = prevScore, ScoreTo = CurrentScore });
             Debug.Log($"Current Score: {CurrentScore}");
         }
     }

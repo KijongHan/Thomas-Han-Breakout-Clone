@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a5a6b785bc116f4ab8e7a5368c1e84c, type: 3}
   m_Name: Brick Data
   m_EditorClassIdentifier: 
-  SpawnReferencePosition: {x: 0, y: 0}
+  SpawnReferencePosition: {x: 0, y: 0.1}
   BrickSpawns:
   - RowOffset: -5
     LevelOffset: 0
