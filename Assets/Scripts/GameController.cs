@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
 
     public BoundaryController[] BoundariesPrefab;
     public BallController BallPrefab;
-    public PlayerController PlayerPrefab;
+    public PlayerCharacterController PlayerPrefab;
     public BrickSpawnManagerScriptableObject BrickSpawner;
 
     public Vector2 PlayerSpawnPosition;

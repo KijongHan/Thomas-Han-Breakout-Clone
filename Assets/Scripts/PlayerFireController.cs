@@ -15,11 +15,11 @@ public class PlayerFireController : MonoBehaviour
 
     public float InitialFireAngle = 45F;
 
-    public PlayerController Player { get; private set; }
+    public PlayerCharacterController Player { get; private set; }
 
     void Awake()
     {
-        Player = GetComponent<PlayerController>();
+        Player = GetComponent<PlayerCharacterController>();
     }
 
     // Start is called before the first frame update

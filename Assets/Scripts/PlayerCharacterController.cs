@@ -9,7 +9,7 @@ public class PlayerScoreUpdated : EventArgs
     public int ScoreTo { get; set; }
 }
 
-public class PlayerController : MonoBehaviour
+public class PlayerCharacterController : MonoBehaviour
 {
     public static event EventHandler<PlayerScoreUpdated> OnPlayerScoreUpdated;
 

@@ -23,12 +23,12 @@ public class ScoreTextController : MonoBehaviour
     void OnEnable()
     {
         OnDisable();
-        PlayerController.OnPlayerScoreUpdated += HandleOnPlayerScoreUpdated;
+        PlayerCharacterController.OnPlayerScoreUpdated += HandleOnPlayerScoreUpdated;
     }
 
     void OnDisable()
     {
-        PlayerController.OnPlayerScoreUpdated -= HandleOnPlayerScoreUpdated;
+        PlayerCharacterController.OnPlayerScoreUpdated -= HandleOnPlayerScoreUpdated;
     }
 
     private void HandleOnPlayerScoreUpdated(object sender, PlayerScoreUpdated e)

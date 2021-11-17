@@ -8,7 +8,7 @@ public class BallController : MonoBehaviour
     public float VelocityMagnitude = 3F;
     public bool FollowPlayer = true;
 
-    public PlayerController Player { get; set; }
+    public PlayerCharacterController Player { get; set; }
     public Vector3 FollowPlayerOffset { get; set; }
     public Collider Collider { get; private set; }
 
