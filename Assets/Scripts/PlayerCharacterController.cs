@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Mirror;
 
 public class PlayerScoreUpdated : EventArgs
 {
@@ -9,7 +10,7 @@ public class PlayerScoreUpdated : EventArgs
     public int ScoreTo { get; set; }
 }
 
-public class PlayerCharacterController : MonoBehaviour
+public class PlayerCharacterController : NetworkBehaviour
 {
     public static event EventHandler<PlayerScoreUpdated> OnPlayerScoreUpdated;
 
@@ -34,7 +35,7 @@ public class PlayerCharacterController : MonoBehaviour
 
     private void HandleOnBrickDestroyed(object sender, BrickDestroyedEventArgs e)
     {
-        if (e.Ball.Player == this)
+        if (e.Ball.PlayerId.netId == netId)
         {
             var prevScore = CurrentScore;
             CurrentScore += e.Brick.ScorePerDestroyedBrick;
@@ -46,10 +47,16 @@ public class PlayerCharacterController : MonoBehaviour
     private void HandleOnGameInitialize(object sender, GameInitializeEventArgs e)
     {
         CurrentScore = 0;
-        InitializeBall();
     }
 
     private void HandleOnDeath(object sender, BoundaryDeathEventArgs e)
+    {
+        if (e.DeadBall.PlayerId.netId != this.netIdentity.netId) return;
+        InitializeBall();
+    }
+
+    [Command]
+    private void InitializeBallCmd()
     {
         InitializeBall();
     }
@@ -57,7 +64,9 @@ public class PlayerCharacterController : MonoBehaviour
     private void InitializeBall()
     {
         var ballInstance = Instantiate(BallPrefab);
-        ballInstance.Player = this;
+        NetworkServer.Spawn(ballInstance.gameObject);
+        ballInstance.PlayerId = netIdentity;
+        ballInstance.FollowTransform = transform;
         ballInstance.transform.position = new Vector3
         {
             x = transform.position.x,
@@ -70,7 +79,8 @@ public class PlayerCharacterController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (!isLocalPlayer) return;
+        InitializeBallCmd();
     }
 
     // Update is called once per frame

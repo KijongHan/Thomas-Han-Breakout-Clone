@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mirror;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public enum Direction
     Right
 }
 
-public class BoundaryController : MonoBehaviour
+public class BoundaryController : NetworkBehaviour
 {
     public Vector2 BoundaryScale;
     public Vector3 PositionScale;
@@ -66,8 +67,7 @@ public class BoundaryController : MonoBehaviour
             x = Vector2.Distance(cameraOrigin, cameraScreenCenterX) * 0.5F,
             y = Vector2.Distance(cameraOrigin, cameraScreenCenterY) * 0.5F
         };
-
-        boxCollider.size = new Vector3
+        transform.localScale = new Vector3
         {
             x = Depth,
             y = BoundaryScale.x * screenSize.x * 2 + BoundaryScale.y * screenSize.y * 2,

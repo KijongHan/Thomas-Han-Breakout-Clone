@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Mirror;
 
-public class PlayerMovementController : MonoBehaviour
+public class PlayerMovementController : NetworkBehaviour
 {
     public float MovementScale = 1.2F;
 
@@ -25,29 +26,9 @@ public class PlayerMovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isLocalPlayer) return;
+
+        movement = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
         rigidbody.MovePosition(transform.TransformPoint(movement * Time.deltaTime * MovementScale));
-    }
-
-    public void Fire(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            Debug.Log("FIRE");
-        }
-    }
-
-    public void Move(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            Debug.Log("MOVE");
-            movement = new Vector3(context.ReadValue<Vector2>().x, 0, 0);
-            //movement *= 0.05F;
-        }
-        if (context.canceled)
-        {
-            Debug.Log("STOP MOVE");
-            movement = new Vector3();
-        }
     }
 }

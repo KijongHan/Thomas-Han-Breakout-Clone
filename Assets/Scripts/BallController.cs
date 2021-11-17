@@ -1,19 +1,20 @@
-﻿using System;
+﻿using Mirror;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallController : MonoBehaviour
+public class BallController : NetworkBehaviour
 {
     public float VelocityMagnitude = 3F;
     public bool FollowPlayer = true;
 
-    public PlayerCharacterController Player { get; set; }
+    public NetworkIdentity PlayerId { get; set; }
     public Vector3 FollowPlayerOffset { get; set; }
+    public Transform FollowTransform { get; set; }
     public Collider Collider { get; private set; }
 
     private new Rigidbody rigidbody;
-    private Vector3 velocity = new Vector3(0F, 0.5F, 0F);
 
     void Awake()
     {
@@ -36,10 +37,11 @@ public class BallController : MonoBehaviour
 
     private void HandleOnFire(object sender, FireEventArgs e)
     {
-        if (e.PlayerFire.Player == Player && FollowPlayer)
+        if (!isServer) return;
+        if (e.PlayerId.netId == PlayerId.netId && FollowPlayer)
         {
             // Try to keep initial and ball fall velocities constant
-            var randomAngleRelativeToRightAngle = UnityEngine.Random.Range(-e.PlayerFire.InitialFireAngle, e.PlayerFire.InitialFireAngle);
+            var randomAngleRelativeToRightAngle = UnityEngine.Random.Range(-e.InitialFireAngle, e.InitialFireAngle);
             var velocityX = Math.Sin(Mathf.Deg2Rad * Math.Abs(randomAngleRelativeToRightAngle)) * VelocityMagnitude;
             var velocityY = Math.Cos(Mathf.Deg2Rad * Math.Abs(randomAngleRelativeToRightAngle)) * VelocityMagnitude;
             if (randomAngleRelativeToRightAngle < 0) velocityX *= -1;
@@ -53,12 +55,6 @@ public class BallController : MonoBehaviour
          if (e.DeadBall == this) Destroy(gameObject);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        rigidbody.velocity = velocity;
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -67,7 +63,7 @@ public class BallController : MonoBehaviour
 
     void LateUpdate()
     {
-        if (FollowPlayer) transform.position = Player.transform.position + FollowPlayerOffset;
+        if (FollowPlayer && isServer) transform.position = FollowTransform.transform.position + FollowPlayerOffset;
     }
 
     void OnCollisionEnter(Collision collision)

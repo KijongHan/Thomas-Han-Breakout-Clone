@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mirror;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ public class GameStartEventArgs : EventArgs { }
 
 public class GameInitializeEventArgs : EventArgs { }
 
-public class GameController : MonoBehaviour
+public class GameController : NetworkBehaviour
 {
     public static event EventHandler<GameInitializeEventArgs> OnGameInitialize;
     public static event EventHandler<GameStartEventArgs> OnGameStart;
@@ -41,6 +42,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!isServer) return;
         InitializeGame();
         StartGame();
     }
@@ -56,13 +58,14 @@ public class GameController : MonoBehaviour
         foreach (var boundary in BoundariesPrefab)
         {
             var boundaryInstance = Instantiate(boundary);
+            NetworkServer.Spawn(boundaryInstance.gameObject);
             boundaryInstance.ZPosition = ZPosition;
         }
-        var playerInstance = Instantiate(PlayerPrefab, new Vector3(PlayerSpawnPosition.x, PlayerSpawnPosition.y, ZPosition), Quaternion.identity);
         
         foreach (var brickSpawn in BrickSpawner.BrickSpawns)
         {
             var brickInstance = Instantiate(brickSpawn.BrickPrefab);
+            NetworkServer.Spawn(brickInstance.gameObject);
             var spawnOffset = new Vector3
             {
                 x = BrickSpawner.SpawnReferencePosition.x + (brickSpawn.RowOffset * (brickInstance.BrickCollider.bounds.size.x + BrickSpawner.BrickGap.x)),

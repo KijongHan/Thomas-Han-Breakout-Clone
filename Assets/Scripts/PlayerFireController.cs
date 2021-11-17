@@ -3,13 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Mirror;
 
 public class FireEventArgs : EventArgs 
 {
-    public PlayerFireController PlayerFire { get; set; }
+    public float InitialFireAngle { get; set; }
+    public NetworkIdentity PlayerId { get; set; }
 }
 
-public class PlayerFireController : MonoBehaviour
+public class PlayerFireController : NetworkBehaviour
 {
     public static event EventHandler<FireEventArgs> OnFire;
 
@@ -31,14 +33,17 @@ public class PlayerFireController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!isLocalPlayer) return;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Fire(Player.netIdentity);
+        }
     }
 
-    public void Fire(InputAction.CallbackContext context)
+    [Command]
+    void Fire(NetworkIdentity playerId)
     {
-        if (context.performed)
-        {
-            OnFire?.Invoke(this, new FireEventArgs { PlayerFire = this });
-        }
+        OnFire?.Invoke(this, new FireEventArgs { PlayerId = playerId, InitialFireAngle = InitialFireAngle });
     }
 }

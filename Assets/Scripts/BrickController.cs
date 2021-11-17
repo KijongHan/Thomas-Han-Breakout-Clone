@@ -1,3 +1,4 @@
+using Mirror;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ public class BrickDestroyedEventArgs : EventArgs
     public BallController Ball { get; set; }
 }
 
-public class BrickController : MonoBehaviour
+public class BrickController : NetworkBehaviour
 {
     public static event EventHandler<BrickHitEventArgs> OnBrickHit;
     public static event EventHandler<BrickDestroyedEventArgs> OnBrickDestroyed;
@@ -43,6 +44,8 @@ public class BrickController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        if (!isServer) return;
+
         if (collision.collider.TryGetComponent(out BallController ball))
         {
             OnBrickHit?.Invoke(this, new BrickHitEventArgs { Ball = ball });

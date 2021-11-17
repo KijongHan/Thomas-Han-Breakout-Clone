@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Mirror;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ public class BoundaryDeathEventArgs : EventArgs
     public BallController DeadBall { get; set; }
 }
 
-public class BoundaryDeathController : MonoBehaviour
+public class BoundaryDeathController : NetworkBehaviour
 {
     public static event EventHandler<BoundaryDeathEventArgs> OnDeath;
 
@@ -50,6 +51,8 @@ public class BoundaryDeathController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        if (!isServer) return;
+
         if (other.TryGetComponent(out BallController ball))
         {
             OnDeath?.Invoke(this, new BoundaryDeathEventArgs { DeadBall = ball });
