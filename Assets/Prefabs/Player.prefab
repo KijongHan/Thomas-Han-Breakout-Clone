@@ -67,6 +67,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8101169949145597124}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Move
         m_Mode: 0
         m_Arguments:
@@ -86,6 +87,7 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5120736479733636761}
+        m_TargetAssemblyTypeName: 
         m_MethodName: Fire
         m_Mode: 0
         m_Arguments:
@@ -155,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c9cd1e9e372a374688dce9a20107ec0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementScale: 1.5
+  MovementScale: 2
 --- !u!23 &8101169949145597125
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -171,6 +173,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -195,6 +198,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &8101169949145597130
 MeshFilter:
   m_ObjectHideFlags: 0

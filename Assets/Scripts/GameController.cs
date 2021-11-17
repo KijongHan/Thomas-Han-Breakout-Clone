@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
     public BoundaryController[] BoundariesPrefab;
     public BallController BallPrefab;
     public PlayerController PlayerPrefab;
+    public BrickSpawnManagerScriptableObject BrickSpawner;
 
     public Vector2 PlayerSpawnPosition;
 
@@ -58,6 +59,18 @@ public class GameController : MonoBehaviour
             boundaryInstance.ZPosition = ZPosition;
         }
         var playerInstance = Instantiate(PlayerPrefab, new Vector3(PlayerSpawnPosition.x, PlayerSpawnPosition.y, ZPosition), Quaternion.identity);
+        
+        foreach (var brickSpawn in BrickSpawner.BrickSpawns)
+        {
+            var brickInstance = Instantiate(BrickSpawner.BrickPrefab);
+            var spawnOffset = new Vector3
+            {
+                x = BrickSpawner.SpawnReferencePosition.x + (brickSpawn.RowOffset * brickInstance.BrickCollider.bounds.size.x),
+                y = BrickSpawner.SpawnReferencePosition.y + (brickSpawn.LevelOffset * brickInstance.BrickCollider.bounds.size.y),
+                z = ZPosition
+            };
+            brickInstance.transform.position = spawnOffset;
+        }
         OnGameInitialize?.Invoke(this, new GameInitializeEventArgs());
     }
 

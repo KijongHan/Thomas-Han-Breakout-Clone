@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a5a6b785bc116f4ab8e7a5368c1e84c, type: 3}
+  m_Name: Brick Data
+  m_EditorClassIdentifier: 
+  BrickPrefab: {fileID: 6246389436672757878, guid: 4eb7ef296bbd57b41a431d69837f9a7f,
+    type: 3}
+  SpawnReferencePosition: {x: 0, y: 0}
+  BrickSpawns:
+  - RowOffset: -2
+    LevelOffset: 0
+  - RowOffset: -1
+    LevelOffset: 0
+  - RowOffset: 0
+    LevelOffset: 0
+  - RowOffset: 1
+    LevelOffset: 0
+  - RowOffset: 2
+    LevelOffset: 0

@@ -7,21 +7,35 @@ public class PlayerController : MonoBehaviour
 {
     public BallController BallPrefab;
 
+    public int CurrentScore { get; private set; }
+
     void OnEnable()
     {
         OnDisable();
         BoundaryDeathController.OnDeath += HandleOnDeath;
         GameController.OnGameInitialize += HandleOnGameInitialize;
+        BrickController.OnBrickDestroyed += HandleOnBrickDestroyed;
     }
 
     void OnDisable()
     {
         BoundaryDeathController.OnDeath -= HandleOnDeath;
         GameController.OnGameInitialize -= HandleOnGameInitialize;
+        BrickController.OnBrickDestroyed -= HandleOnBrickDestroyed;
+    }
+
+    private void HandleOnBrickDestroyed(object sender, BrickDestroyedEventArgs e)
+    {
+        if (e.Ball.Player == this)
+        {
+            CurrentScore += e.Brick.ScorePerDestroyedBrick;
+            Debug.Log($"Current Score: {CurrentScore}");
+        }
     }
 
     private void HandleOnGameInitialize(object sender, GameInitializeEventArgs e)
     {
+        CurrentScore = 0;
         InitializeBall();
     }
 
