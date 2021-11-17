@@ -62,11 +62,11 @@ public class GameController : MonoBehaviour
         
         foreach (var brickSpawn in BrickSpawner.BrickSpawns)
         {
-            var brickInstance = Instantiate(BrickSpawner.BrickPrefab);
+            var brickInstance = Instantiate(brickSpawn.BrickPrefab);
             var spawnOffset = new Vector3
             {
-                x = BrickSpawner.SpawnReferencePosition.x + (brickSpawn.RowOffset * brickInstance.BrickCollider.bounds.size.x),
-                y = BrickSpawner.SpawnReferencePosition.y + (brickSpawn.LevelOffset * brickInstance.BrickCollider.bounds.size.y),
+                x = BrickSpawner.SpawnReferencePosition.x + (brickSpawn.RowOffset * (brickInstance.BrickCollider.bounds.size.x + BrickSpawner.BrickGap.x)),
+                y = BrickSpawner.SpawnReferencePosition.y + (brickSpawn.LevelOffset * (brickInstance.BrickCollider.bounds.size.y + BrickSpawner.BrickGap.y)),
                 z = ZPosition
             };
             brickInstance.transform.position = spawnOffset;

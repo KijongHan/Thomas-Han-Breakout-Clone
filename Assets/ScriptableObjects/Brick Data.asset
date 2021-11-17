@@ -12,17 +12,206 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a5a6b785bc116f4ab8e7a5368c1e84c, type: 3}
   m_Name: Brick Data
   m_EditorClassIdentifier: 
-  BrickPrefab: {fileID: 6246389436672757878, guid: 4eb7ef296bbd57b41a431d69837f9a7f,
-    type: 3}
   SpawnReferencePosition: {x: 0, y: 0}
   BrickSpawns:
+  - RowOffset: -5
+    LevelOffset: 0
+    BrickPrefab: {fileID: 6246389436672757878, guid: 4eb7ef296bbd57b41a431d69837f9a7f,
+      type: 3}
+  - RowOffset: -4
+    LevelOffset: 0
+    BrickPrefab: {fileID: 6246389436672757878, guid: 4eb7ef296bbd57b41a431d69837f9a7f,
+      type: 3}
+  - RowOffset: -3
+    LevelOffset: 0
+    BrickPrefab: {fileID: 6246389436672757878, guid: 4eb7ef296bbd57b41a431d69837f9a7f,
+      type: 3}
   - RowOffset: -2
     LevelOffset: 0
+    BrickPrefab: {fileID: 6246389436672757878, guid: 4eb7ef296bbd57b41a431d69837f9a7f,
+      type: 3}
   - RowOffset: -1
     LevelOffset: 0
-  - RowOffset: 0
-    LevelOffset: 0
+    BrickPrefab: {fileID: 6246389436672757878, guid: 4eb7ef296bbd57b41a431d69837f9a7f,
+      type: 3}
   - RowOffset: 1
     LevelOffset: 0
+    BrickPrefab: {fileID: 6246389436672757878, guid: 4eb7ef296bbd57b41a431d69837f9a7f,
+      type: 3}
   - RowOffset: 2
     LevelOffset: 0
+    BrickPrefab: {fileID: 6246389436672757878, guid: 4eb7ef296bbd57b41a431d69837f9a7f,
+      type: 3}
+  - RowOffset: 3
+    LevelOffset: 0
+    BrickPrefab: {fileID: 6246389436672757878, guid: 4eb7ef296bbd57b41a431d69837f9a7f,
+      type: 3}
+  - RowOffset: 4
+    LevelOffset: 0
+    BrickPrefab: {fileID: 6246389436672757878, guid: 4eb7ef296bbd57b41a431d69837f9a7f,
+      type: 3}
+  - RowOffset: 5
+    LevelOffset: 0
+    BrickPrefab: {fileID: 6246389436672757878, guid: 4eb7ef296bbd57b41a431d69837f9a7f,
+      type: 3}
+  - RowOffset: -5
+    LevelOffset: 1
+    BrickPrefab: {fileID: 6246389436672757878, guid: 6d77415e7bd88c6488632c2ada55c886,
+      type: 3}
+  - RowOffset: -4
+    LevelOffset: 1
+    BrickPrefab: {fileID: 6246389436672757878, guid: 6d77415e7bd88c6488632c2ada55c886,
+      type: 3}
+  - RowOffset: -3
+    LevelOffset: 1
+    BrickPrefab: {fileID: 6246389436672757878, guid: 6d77415e7bd88c6488632c2ada55c886,
+      type: 3}
+  - RowOffset: -2
+    LevelOffset: 1
+    BrickPrefab: {fileID: 6246389436672757878, guid: 6d77415e7bd88c6488632c2ada55c886,
+      type: 3}
+  - RowOffset: -1
+    LevelOffset: 1
+    BrickPrefab: {fileID: 6246389436672757878, guid: 6d77415e7bd88c6488632c2ada55c886,
+      type: 3}
+  - RowOffset: 1
+    LevelOffset: 1
+    BrickPrefab: {fileID: 6246389436672757878, guid: 6d77415e7bd88c6488632c2ada55c886,
+      type: 3}
+  - RowOffset: 2
+    LevelOffset: 1
+    BrickPrefab: {fileID: 6246389436672757878, guid: 6d77415e7bd88c6488632c2ada55c886,
+      type: 3}
+  - RowOffset: 3
+    LevelOffset: 1
+    BrickPrefab: {fileID: 6246389436672757878, guid: 6d77415e7bd88c6488632c2ada55c886,
+      type: 3}
+  - RowOffset: 4
+    LevelOffset: 1
+    BrickPrefab: {fileID: 6246389436672757878, guid: 6d77415e7bd88c6488632c2ada55c886,
+      type: 3}
+  - RowOffset: 5
+    LevelOffset: 1
+    BrickPrefab: {fileID: 6246389436672757878, guid: 6d77415e7bd88c6488632c2ada55c886,
+      type: 3}
+  - RowOffset: -5
+    LevelOffset: 2
+    BrickPrefab: {fileID: 6246389436672757878, guid: a36385391e07ac44580de49868caf474,
+      type: 3}
+  - RowOffset: -4
+    LevelOffset: 2
+    BrickPrefab: {fileID: 6246389436672757878, guid: a36385391e07ac44580de49868caf474,
+      type: 3}
+  - RowOffset: -3
+    LevelOffset: 2
+    BrickPrefab: {fileID: 6246389436672757878, guid: a36385391e07ac44580de49868caf474,
+      type: 3}
+  - RowOffset: -2
+    LevelOffset: 2
+    BrickPrefab: {fileID: 6246389436672757878, guid: a36385391e07ac44580de49868caf474,
+      type: 3}
+  - RowOffset: -1
+    LevelOffset: 2
+    BrickPrefab: {fileID: 6246389436672757878, guid: a36385391e07ac44580de49868caf474,
+      type: 3}
+  - RowOffset: 1
+    LevelOffset: 2
+    BrickPrefab: {fileID: 6246389436672757878, guid: a36385391e07ac44580de49868caf474,
+      type: 3}
+  - RowOffset: 2
+    LevelOffset: 2
+    BrickPrefab: {fileID: 6246389436672757878, guid: a36385391e07ac44580de49868caf474,
+      type: 3}
+  - RowOffset: 3
+    LevelOffset: 2
+    BrickPrefab: {fileID: 6246389436672757878, guid: a36385391e07ac44580de49868caf474,
+      type: 3}
+  - RowOffset: 4
+    LevelOffset: 2
+    BrickPrefab: {fileID: 6246389436672757878, guid: a36385391e07ac44580de49868caf474,
+      type: 3}
+  - RowOffset: 5
+    LevelOffset: 2
+    BrickPrefab: {fileID: 6246389436672757878, guid: a36385391e07ac44580de49868caf474,
+      type: 3}
+  - RowOffset: -5
+    LevelOffset: 3
+    BrickPrefab: {fileID: 6246389436672757878, guid: 1525a76806cf96f4b8f64a30c56711c3,
+      type: 3}
+  - RowOffset: -4
+    LevelOffset: 3
+    BrickPrefab: {fileID: 6246389436672757878, guid: 1525a76806cf96f4b8f64a30c56711c3,
+      type: 3}
+  - RowOffset: -3
+    LevelOffset: 3
+    BrickPrefab: {fileID: 6246389436672757878, guid: 1525a76806cf96f4b8f64a30c56711c3,
+      type: 3}
+  - RowOffset: -2
+    LevelOffset: 3
+    BrickPrefab: {fileID: 6246389436672757878, guid: 1525a76806cf96f4b8f64a30c56711c3,
+      type: 3}
+  - RowOffset: -1
+    LevelOffset: 3
+    BrickPrefab: {fileID: 6246389436672757878, guid: 1525a76806cf96f4b8f64a30c56711c3,
+      type: 3}
+  - RowOffset: 1
+    LevelOffset: 3
+    BrickPrefab: {fileID: 6246389436672757878, guid: 1525a76806cf96f4b8f64a30c56711c3,
+      type: 3}
+  - RowOffset: 2
+    LevelOffset: 3
+    BrickPrefab: {fileID: 6246389436672757878, guid: 1525a76806cf96f4b8f64a30c56711c3,
+      type: 3}
+  - RowOffset: 3
+    LevelOffset: 3
+    BrickPrefab: {fileID: 6246389436672757878, guid: 1525a76806cf96f4b8f64a30c56711c3,
+      type: 3}
+  - RowOffset: 4
+    LevelOffset: 3
+    BrickPrefab: {fileID: 6246389436672757878, guid: 1525a76806cf96f4b8f64a30c56711c3,
+      type: 3}
+  - RowOffset: 5
+    LevelOffset: 3
+    BrickPrefab: {fileID: 6246389436672757878, guid: 1525a76806cf96f4b8f64a30c56711c3,
+      type: 3}
+  - RowOffset: -5
+    LevelOffset: 4
+    BrickPrefab: {fileID: 6246389436672757878, guid: 0871a39bd0fdd864183befe45e716eb2,
+      type: 3}
+  - RowOffset: -4
+    LevelOffset: 4
+    BrickPrefab: {fileID: 6246389436672757878, guid: 0871a39bd0fdd864183befe45e716eb2,
+      type: 3}
+  - RowOffset: -3
+    LevelOffset: 4
+    BrickPrefab: {fileID: 6246389436672757878, guid: 0871a39bd0fdd864183befe45e716eb2,
+      type: 3}
+  - RowOffset: -2
+    LevelOffset: 4
+    BrickPrefab: {fileID: 6246389436672757878, guid: 0871a39bd0fdd864183befe45e716eb2,
+      type: 3}
+  - RowOffset: -1
+    LevelOffset: 4
+    BrickPrefab: {fileID: 6246389436672757878, guid: 0871a39bd0fdd864183befe45e716eb2,
+      type: 3}
+  - RowOffset: 1
+    LevelOffset: 4
+    BrickPrefab: {fileID: 6246389436672757878, guid: 0871a39bd0fdd864183befe45e716eb2,
+      type: 3}
+  - RowOffset: 2
+    LevelOffset: 4
+    BrickPrefab: {fileID: 6246389436672757878, guid: 0871a39bd0fdd864183befe45e716eb2,
+      type: 3}
+  - RowOffset: 3
+    LevelOffset: 4
+    BrickPrefab: {fileID: 6246389436672757878, guid: 0871a39bd0fdd864183befe45e716eb2,
+      type: 3}
+  - RowOffset: 4
+    LevelOffset: 4
+    BrickPrefab: {fileID: 6246389436672757878, guid: 0871a39bd0fdd864183befe45e716eb2,
+      type: 3}
+  - RowOffset: 5
+    LevelOffset: 4
+    BrickPrefab: {fileID: 6246389436672757878, guid: 0871a39bd0fdd864183befe45e716eb2,
+      type: 3}
+  BrickGap: {x: 0.02, y: 0.02}
