@@ -24,7 +24,8 @@ public class PlayerCharacterController : NetworkBehaviour
     public BallController BallPrefab;
 
     public Collider Collider { get; private set; }
-    public int CurrentScore { get; private set; }
+    [SyncVar(hook = nameof(OnPlayerScoreUpdatedHook))]
+    public int CurrentScore = 0;
 
     void OnEnable()
     {
@@ -53,13 +54,15 @@ public class PlayerCharacterController : NetworkBehaviour
 
     private void HandleOnBrickDestroyed(object sender, BrickDestroyedEventArgs e)
     {
-        if (e.Ball.PlayerId.netId == netId)
-        {
-            var prevScore = CurrentScore;
-            CurrentScore += e.Brick.ScorePerDestroyedBrick;
-            OnPlayerScoreUpdated?.Invoke(this, new PlayerScoreUpdated { ScoreFrom = prevScore, ScoreTo = CurrentScore });
-            Debug.Log($"Current Score: {CurrentScore}");
-        }
+        var prevScore = CurrentScore;
+        CurrentScore += e.Brick.ScorePerDestroyedBrick;
+        Debug.Log($"Current Score: {CurrentScore}");
+    }
+
+    private void OnPlayerScoreUpdatedHook(int oldScore, int newScore)
+    {
+        if (!isLocalPlayer) return;
+        OnPlayerScoreUpdated?.Invoke(this, new PlayerScoreUpdated { ScoreFrom = oldScore, ScoreTo = newScore });
     }
 
     private void HandleOnGameInitialize(object sender, GameInitializeEventArgs e)
