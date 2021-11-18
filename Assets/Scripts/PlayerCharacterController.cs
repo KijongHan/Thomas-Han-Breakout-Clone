@@ -10,9 +10,16 @@ public class PlayerScoreUpdated : EventArgs
     public int ScoreTo { get; set; }
 }
 
+public class PlayerBallInitialized : EventArgs
+{
+    public PlayerCharacterController Player { get; set; }
+    public BallController InitializedBall { get; set; }
+}
+
 public class PlayerCharacterController : NetworkBehaviour
 {
     public static event EventHandler<PlayerScoreUpdated> OnPlayerScoreUpdated;
+    public static event EventHandler<PlayerBallInitialized> OnPlayerBallInitialized;
 
     public BallController BallPrefab;
 
@@ -25,6 +32,7 @@ public class PlayerCharacterController : NetworkBehaviour
         BoundaryDeathController.OnDeath += HandleOnDeath;
         GameController.OnGameInitialize += HandleOnGameInitialize;
         BrickController.OnBrickDestroyed += HandleOnBrickDestroyed;
+        OnPlayerBallInitialized += HandleOnPlayerBallInitialized;
     }
 
     void OnDisable()
@@ -32,6 +40,15 @@ public class PlayerCharacterController : NetworkBehaviour
         BoundaryDeathController.OnDeath -= HandleOnDeath;
         GameController.OnGameInitialize -= HandleOnGameInitialize;
         BrickController.OnBrickDestroyed -= HandleOnBrickDestroyed;
+        OnPlayerBallInitialized -= HandleOnPlayerBallInitialized;
+    }
+
+    private void HandleOnPlayerBallInitialized(object sender, PlayerBallInitialized e)
+    {
+        if (netId != e.Player.netId)
+        {
+            Physics.IgnoreCollision(e.InitializedBall.Collider, Collider);
+        }
     }
 
     private void HandleOnBrickDestroyed(object sender, BrickDestroyedEventArgs e)
@@ -75,17 +92,7 @@ public class PlayerCharacterController : NetworkBehaviour
             z = transform.position.z
         };
         ballInstance.FollowPlayerOffset = ballInstance.transform.position - transform.position;
-
-        foreach (var player in GameObject.FindGameObjectsWithTag("Player"))
-        {
-            if (player.TryGetComponent(out PlayerCharacterController playerCharacterController))
-            {
-                if (playerCharacterController.netId != netId)
-                {
-                    Physics.IgnoreCollision(ballInstance.Collider, playerCharacterController.Collider);
-                }
-            }
-        }
+        OnPlayerBallInitialized?.Invoke(this, new PlayerBallInitialized { InitializedBall = ballInstance, Player = this });
     }
 
     private void Awake()

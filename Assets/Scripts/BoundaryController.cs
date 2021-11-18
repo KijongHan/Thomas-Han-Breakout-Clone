@@ -76,8 +76,8 @@ public class BoundaryController : NetworkBehaviour
         var cameraPosition = Camera.main.transform.position;
         transform.position = new Vector3
         {
-            x = cameraPosition.x + (screenSize.x * PositionScale.x),
-            y = cameraPosition.y + (screenSize.y * PositionScale.y),
+            x = cameraPosition.x + (screenSize.x * PositionScale.x) + ((Thickness / 2) * PositionScale.x),
+            y = cameraPosition.y + (screenSize.y * PositionScale.y) + ((Thickness / 2) * PositionScale.y),
             z = ZPosition
         };
         transform.LookAt(new Vector3(0F, 0F, ZPosition), Vector3.up);

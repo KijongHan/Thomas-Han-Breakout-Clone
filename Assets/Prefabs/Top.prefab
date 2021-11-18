@@ -73,7 +73,7 @@ MonoBehaviour:
   BoundaryScale: {x: 1, y: 0}
   PositionScale: {x: 0, y: 1, z: 0}
   FaceDirection: {x: 0, y: 0, z: 0}
-  Thickness: 0.1
+  Thickness: 0.5
   Depth: 4
 --- !u!114 &-5294468180932032037
 MonoBehaviour:

@@ -27,12 +27,22 @@ public class BallController : NetworkBehaviour
         OnDisable();
         BoundaryDeathController.OnDeath += HandleOnDeath;
         PlayerFireController.OnFire += HandleOnFire;
+        PlayerCharacterController.OnPlayerBallInitialized += HandleOnPlayerBallInitialized;
     }
 
     void OnDisable()
     {
         BoundaryDeathController.OnDeath -= HandleOnDeath;
         PlayerFireController.OnFire -= HandleOnFire;
+        PlayerCharacterController.OnPlayerBallInitialized -= HandleOnPlayerBallInitialized;
+    }
+
+    private void HandleOnPlayerBallInitialized(object sender, PlayerBallInitialized e)
+    {
+        if (e.InitializedBall.netId != netId)
+        {
+            Physics.IgnoreCollision(e.InitializedBall.Collider, Collider);
+        }
     }
 
     private void HandleOnFire(object sender, FireEventArgs e)
