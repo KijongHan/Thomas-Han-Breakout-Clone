@@ -16,6 +16,7 @@ public class PlayerCharacterController : NetworkBehaviour
 
     public BallController BallPrefab;
 
+    public Collider Collider { get; private set; }
     public int CurrentScore { get; private set; }
 
     void OnEnable()
@@ -70,10 +71,26 @@ public class PlayerCharacterController : NetworkBehaviour
         ballInstance.transform.position = new Vector3
         {
             x = transform.position.x,
-            y = transform.position.y + (ballInstance.Collider.bounds.size.y / 2) + 0.05F,
+            y = transform.position.y + (ballInstance.Collider.bounds.size.y / 2) + 0.025F,
             z = transform.position.z
         };
         ballInstance.FollowPlayerOffset = ballInstance.transform.position - transform.position;
+
+        foreach (var player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            if (player.TryGetComponent(out PlayerCharacterController playerCharacterController))
+            {
+                if (playerCharacterController.netId != netId)
+                {
+                    Physics.IgnoreCollision(ballInstance.Collider, playerCharacterController.Collider);
+                }
+            }
+        }
+    }
+
+    private void Awake()
+    {
+        Collider = GetComponent<Collider>();
     }
 
     // Start is called before the first frame update
